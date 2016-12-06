@@ -40,7 +40,8 @@
                 <div flex="20" layout layout-align="center center">
                   <i class="fa fa-file-text fa-5x" aria-hidden="true"></i>
                 </div>
-                <div ng-if="vm.infoPresent" layout="row" layout-align="center center" flex>
+
+                <div ng-if="vm.infoPresent && !vm.progress" layout="row" layout-align="center center" flex>
                   <div layout="column" ng-if="vm.companyInfo.valid" flex>
                     <div class="validVat">
                       <p>VAT Number '{{vm.companyInfo.countryCode + vm.companyInfo.vatNumber}}' is: <strong>VALID</strong></p>
@@ -58,7 +59,12 @@
                     <h1 class="pickValid">Please pick a valid VAT</h1>
                   </div>
                 </div>
-                <div ng-if="!vm.infoPresent" layout="row" layout-align="center center" flex>
+
+                <div ng-if="!vm.infoPresent && vm.progress" layout layout-align="center center" flex>
+                  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+
+                <div ng-if="!vm.infoPresent && !vm.progress" layout="row" layout-align="center center" flex>
                   <h1 class="noInfo">No information present</h1>
                 </div>
               </div>

@@ -29,6 +29,10 @@ md-input-container{
   border-radius: 50%;
 }
 
+i.fa-file-text{
+    color: #00644b;
+}
+
 #result h1{
   margin-top: 0;
   margin-bottom: 14px;

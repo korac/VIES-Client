@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>VIES Client</title>
+    <link rel="stylesheet" href="./lib/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body ng-app="ViesApp">
+    <div class="background background-grey" ng-controller="MainController as vm" layout="column" layout-align="center stretch" ng-cloak>
+
+      <div layout layout-align="center center">
+        <h1>{{vm.title}}</h1>
+      </div>
+      <div layout layout-align="center center" flex=60>
+        <div layout="row" flex=65>
+          <md-card flex>
+            <md-card-content layout="row">
+              <div class="formContent" flex="35" layout-padding>
+                <h3>VAT INPUT INFORMATION</h3>
+                <form name="vatForm" layout="column" ng-submit="vatForm.$valid && vm.sendVat()" novalidate>
+                  <md-input-container>
+                    <md-select ng-model="vm.vat.countryCode">
+                        <md-option ng-value="c.code" ng-repeat="c in vm.countries">{{ c.code }} - {{ c.country }}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <md-input-container>
+                    <label>VAT Number</label>
+                    <input type="text" ng-model="vm.vat.number" required>
+                  </md-input-container>
+                  <div layout>
+                    <md-button flex type="submit" class="md-primary">Submit</md-button>
+                  </div>
+                </form>
+              </div>
+
+              <div flex layout="row" layout-padding layout-align="space-around center" id="result">
+                <img ng-src="{{vm.companyImg}}" alt="company-icon" class="img-circle"/>
+                <div ng-if="vm.infoPresent" layout="row" layout-align="center center" flex>
+                  <div layout="column" ng-if="vm.companyInfo.valid" flex>
+                    <div class="validVat">
+                      <p>VAT Number '{{vm.companyInfo.countryCode + vm.companyInfo.vatNumber}}' is: <strong>VALID</strong></p>
+                      <hr flex>
+                    </div>
+                    <h1>{{vm.companyInfo.name || '--'}}</h1>
+                    <p>{{vm.companyInfo.address || '--'}}</p>
+                    <span><small>Request date: {{vm.companyInfo.requestDate | date: 'mediumDate'}}</small></span>
+                  </div>
+                  <div layout="column" ng-if="!vm.companyInfo.valid" flex>
+                    <div class="invalidVat">
+                      <p>VAT Number '{{vm.companyInfo.countryCode + vm.companyInfo.vatNumber}}' is: <strong>INVALID</strong></p>
+                      <hr flex>
+                    </div>
+                    <h1 class="pickValid">Please pick a valid VAT</h1>
+                  </div>
+                </div>
+                <div ng-if="!vm.infoPresent" layout="row" layout-align="center center" flex>
+                  <h1 class="noInfo">No information present</h1>
+                </div>
+              </div>
+
+            </md-card-content>
+          </md-card>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="./lib/angular.min.js"></script>
+    <script src="./lib/angular-animate.min.js"></script>
+    <script src="./lib/angular-aria.min.js"></script>
+    <script src="./lib/angular-messages.min.js"></script>
+    <script src="./lib/angular-route.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="./bower_components/angular-material/angular-material.min.js"></script>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/controllers/MainController.js"></script>
+    <script src="./js/services/VatService.js"></script>
+  </body>
+</html>

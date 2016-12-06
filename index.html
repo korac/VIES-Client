@@ -22,16 +22,16 @@
                 <h3>VAT INPUT INFORMATION</h3>
                 <form name="vatForm" layout="column" ng-submit="vatForm.$valid && vm.sendVat()" novalidate>
                   <md-input-container>
-                    <md-select ng-model="vm.vat.countryCode">
+                    <md-select ng-model="vm.vat.countryCode" aria-label="selectCountryCode">
                         <md-option ng-value="c.code" ng-repeat="c in vm.countries">{{ c.code }} - {{ c.country }}</md-option>
                     </md-select>
                   </md-input-container>
                   <md-input-container>
                     <label>VAT Number</label>
-                    <input type="text" ng-model="vm.vat.number" required>
+                    <input type="text" ng-model="vm.vat.number" aria-label="vatNum" required>
                   </md-input-container>
                   <div layout>
-                    <md-button flex type="submit" class="md-primary">Submit</md-button>
+                    <md-button flex type="submit" class="md-primary" aria-label="submit">Submit</md-button>
                   </div>
                 </form>
               </div>

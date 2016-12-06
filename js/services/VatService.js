@@ -12,9 +12,7 @@
     this.requestVatInfo = requestVatInfo;
 
     function requestVatInfo(vat){
-      console.log("u servisu smo");
-      console.log(vat);
-      return $http.get('http://localhost:8080/vats/' + vat.number).then(
+      return $http.get('https://morning-tundra-61517.herokuapp.com/vats/' + vat.number).then(
         function successCallback(response){
           console.log("SUCCESS");
           return response.data;
